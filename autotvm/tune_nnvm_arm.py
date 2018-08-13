@@ -77,8 +77,8 @@ def get_network(name, batch_size):
     elif name =='ssd':
         mx_sym, args, auxs = mx.model.load_checkpoint('/tvm/tutorials/autotvm/deploy_ssd_legacy_pelee_320', 240)
         net, params = nnvm.frontend.from_mxnet(mx_sym, args, auxs)
-        shape = {"data": (batch_size, 3, 320, 320)}
-        output_shape = (batch_size, 2795 * 6)
+        input_shape = (batch_size, 3, 320, 320)
+        output_shape = (batch_size, 5100 * 6)
     elif name =='custom':
         # an example for custom network
         from nnvm.testing import utils
