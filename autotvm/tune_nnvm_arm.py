@@ -74,12 +74,8 @@ def get_network(name, batch_size):
         net, params = nnvm.testing.squeezenet.get_workload(batch_size=batch_size, version='1.1')
     elif name =='vgg-16':
         net, params = nnvm.testing.vgg.get_workload(num_layers=16, batch_size=batch_size)
-    elif name =='peleenet':
-        mx_sym, args, auxs = mx.model.load_checkpoint('/opt/compile/BoxV3/tvm/tutorials/autotvm/mmr_peleenet', 70)
-        net, params = nnvm.frontend.from_mxnet(mx_sym, args, auxs)
-        output_shape = (batch_size, 3341)
     elif name =='ssd':
-        mx_sym, args, auxs = mx.model.load_checkpoint('/opt/compile/BoxV3/tvm/tutorials/autotvm/deploy_ssd_legacy_pelee_SSD_v4_320', 81)
+        mx_sym, args, auxs = mx.model.load_checkpoint('/tvm/tutorials/autotvm/deploy_ssd_legacy_pelee_320', 240)
         net, params = nnvm.frontend.from_mxnet(mx_sym, args, auxs)
         shape = {"data": (batch_size, 3, 320, 320)}
         output_shape = (batch_size, 2795 * 6)
